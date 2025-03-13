@@ -6,10 +6,15 @@ import { useNavigate } from "react-router-dom";
 import { Scoreboard } from "@/components/Scoreboard";
 import { Trophy, Users, Calendar, ClipboardList } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { useEffect } from "react";
 
 const Index = () => {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
+
+  useEffect(() => {
+    console.log("Index page mounted");
+  }, []);
 
   return (
     <Layout>
