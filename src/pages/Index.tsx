@@ -10,11 +10,36 @@ import { useEffect } from "react";
 
 const Index = () => {
   const navigate = useNavigate();
-  const { currentUser } = useAuth();
+  
+  let currentUser;
+  try {
+    const { currentUser: user } = useAuth();
+    currentUser = user;
+    console.log("Auth context loaded successfully");
+  } catch (error) {
+    console.error("Error loading auth context:", error);
+  }
 
   useEffect(() => {
     console.log("Index page mounted");
+    try {
+      console.log("Layout component status:", !!Layout);
+      console.log("Card component status:", !!Card);
+      console.log("Button component status:", !!Button);
+      console.log("Scoreboard component status:", !!Scoreboard);
+    } catch (error) {
+      console.error("Error during component status check:", error);
+    }
   }, []);
+
+  const handleViewScoreboard = () => {
+    try {
+      console.log("Navigating to scoreboard");
+      navigate("/scoreboard");
+    } catch (error) {
+      console.error("Navigation error:", error);
+    }
+  };
 
   return (
     <Layout>
@@ -32,7 +57,7 @@ const Index = () => {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button
-                onClick={() => navigate("/scoreboard")}
+                onClick={handleViewScoreboard}
                 size="lg"
                 className="flex items-center font-medium"
               >
